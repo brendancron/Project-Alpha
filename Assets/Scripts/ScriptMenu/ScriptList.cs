@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
-public class ScriptList : MonoBehaviour
-{
-    // Start is called before the first frame update
+public class ScriptList : MonoBehaviour {
+
+    public GameObject scriptPanelPrefab;
+
+    public float ratio = 0.2f;
+
     void Start() {
         CheckDirectory();
         UpdateList();
@@ -17,12 +20,24 @@ public class ScriptList : MonoBehaviour
     }
 
     public void UpdateList() {
-        CheckDirectory();
-        print("getting files");
-        string[] filePaths = Directory.GetFiles(ProjectVariables.scriptDirectoryPath, "*.py", SearchOption.TopDirectoryOnly);
-        foreach(string s in filePaths) {
-            print(s);
+        foreach (Transform child in transform) {
+            Destroy(child.gameObject);
         }
+        CheckDirectory();
+        string[] filePaths = Directory.GetFiles(ProjectVariables.scriptDirectoryPath, "*.py", SearchOption.TopDirectoryOnly);
+        int num = 0;
+        float width = GetComponent<RectTransform>().rect.width;
+        float height = width*ratio;
+        foreach(string s in filePaths) {
+            if(true) { // this line should check a regex for valid file names!
+                //print(s);
+
+                GameObject scriptPanel = Object.Instantiate(scriptPanelPrefab, transform);
+                scriptPanel.GetComponent<ScriptPanel>().init(num);
+                num++;
+            }
+        }
+        float scrollheight = num*height;
     }
 
     private void CheckDirectory() {
