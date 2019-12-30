@@ -2,10 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PressurePlate : MonoBehaviour {
+public class PressurePlate : CheckPoint {
     
+    int objectsOn = 0;
+
     void OnTriggerEnter(Collider col) {
-        print("hello");
+        objectsOn++;
+    }
+
+    void OnTriggerExit(Collider col) {
+        objectsOn--;
+    }
+
+    public override bool IsActive() {
+        return (objectsOn > 0);
     }
 
 }
