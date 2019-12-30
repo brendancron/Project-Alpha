@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Text.RegularExpressions;
 
 public class ScriptList : MonoBehaviour {
 
     public GameObject scriptPanelPrefab;
 
-    public float ratio = 0.2f;
+    public RectTransform listRectTransform;
+
+    public static readonly Regex regex = new Regex(@"[a-zA-Z0-9_]+\.py$");
 
     void Start() {
         CheckDirectory();
-        UpdateList();
+        listRectTransform = GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -26,18 +29,20 @@ public class ScriptList : MonoBehaviour {
         CheckDirectory();
         string[] filePaths = Directory.GetFiles(ProjectVariables.scriptDirectoryPath, "*.py", SearchOption.TopDirectoryOnly);
         int num = 0;
-        float width = GetComponent<RectTransform>().rect.width;
-        float height = width*ratio;
+        float width = listRectTransform.rect.width;
         foreach(string s in filePaths) {
-            if(true) { // this line should check a regex for valid file names!
+            // this if conditional should check a regex for valid file names!
+            if(regex.Matches(s.Substring(ProjectVariables.scriptDirectoryPath.Length)).Count > 0) { 
                 //print(s);
 
                 GameObject scriptPanel = Object.Instantiate(scriptPanelPrefab, transform);
-                scriptPanel.GetComponent<ScriptPanel>().init(num);
+                scriptPanel.GetComponent<ScriptPanel>().init(num, s);
                 num++;
             }
         }
-        float scrollheight = num*height;
+        float height = listRectTransform.rect.width * ScriptPanel.ratio * num;
+        listRectTransform.offsetMin = new Vector2(listRectTransform.offsetMin.x, 0);
+        listRectTransform.offsetMax = new Vector2(listRectTransform.offsetMax.x, height);
     }
 
     private void CheckDirectory() {

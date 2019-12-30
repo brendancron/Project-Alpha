@@ -28,9 +28,9 @@ public class ScriptMenu : MonoBehaviour
                 menu.SetActive(false);
                 Cursor.lockState = CursorLockMode.Locked;
             } else {
-                scriptList.UpdateList();
                 menu.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
+                scriptList.UpdateList();
             }
         }
     }

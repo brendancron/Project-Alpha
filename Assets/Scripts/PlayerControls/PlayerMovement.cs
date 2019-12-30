@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
+    public GameObject menu;
+
     public CharacterController controller;
     public float speed = 12f;
     public float gravity = -9.81f;
@@ -28,8 +30,13 @@ public class PlayerMovement : MonoBehaviour {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        float x = 0;
+        float z = 0;
+
+        if(!menu.activeSelf) {
+            x = Input.GetAxis("Horizontal");
+            z = Input.GetAxis("Vertical");
+        }
 
         Vector3 move = transform.right * x + transform.forward * z;
 
