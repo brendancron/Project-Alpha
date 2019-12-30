@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Diagnostics;
 
 public class ScriptPanel : MonoBehaviour {
     
@@ -9,6 +11,8 @@ public class ScriptPanel : MonoBehaviour {
     public static float ratio = 0.1f;
 
     private string path;
+
+    public Text text;
 
     public void init(int num, string path) {
         this.path = path;
@@ -21,6 +25,12 @@ public class ScriptPanel : MonoBehaviour {
         float top = -height*num;
         panelRectTransform.offsetMin = new Vector2(panelRectTransform.offsetMin.x, bottom);
         panelRectTransform.offsetMax = new Vector2(panelRectTransform.offsetMax.x, top);
+        text.text = path.Substring(ProjectVariables.scriptDirectoryPath.Length+1);
+    }
+
+    public void OpenFile() {
+        //THERE MAY BE A LOT OF BUGS WITH THIS LINE!!!!!!!!!
+        Process.Start(path);
     }
 
 }

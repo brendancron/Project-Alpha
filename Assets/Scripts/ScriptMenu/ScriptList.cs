@@ -32,7 +32,7 @@ public class ScriptList : MonoBehaviour {
         float width = listRectTransform.rect.width;
         foreach(string s in filePaths) {
             // this if conditional should check a regex for valid file names!
-            if(regex.Matches(s.Substring(ProjectVariables.scriptDirectoryPath.Length)).Count > 0) { 
+            if(regex.Matches(s.Substring(ProjectVariables.scriptDirectoryPath.Length+1)).Count > 0) { 
                 //print(s);
 
                 GameObject scriptPanel = Object.Instantiate(scriptPanelPrefab, transform);
