@@ -8,7 +8,7 @@ public class StringExpression : Expression {
 		return "String( "+str+" )";
 	}
 
-	public override Value Eval() {
-		return null;
+	public override Value Eval(Environment env) {
+		return new Value(str);
 	}
 }

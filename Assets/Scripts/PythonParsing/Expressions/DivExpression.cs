@@ -1,3 +1,5 @@
+using System;
+
 public class DivExpression : Expression{
 	public DivExpression(Expression left, Expression right) {
 		this.left = left;
@@ -10,7 +12,7 @@ public class DivExpression : Expression{
 		return "Div( "+left+", "+right+" )";
 	}
 
-	public override Value Eval() {
+	public override Value Eval(Environment env) {
 		Value lv = left.Eval(env);
 		Value rv = right.Eval(env);
 		if(lv.valType == Value.ValType.Float && rv.valType == Value.ValType.Float) {

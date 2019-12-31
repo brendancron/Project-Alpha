@@ -13,4 +13,6 @@ public class FunctionDeclarationStatement : Statement{
 	public override string ToString() {
 		return "FunctionDecl( "+id+", "+args+", "+code+" )";
 	}
+
+	public override void Eval(Environment env){}
 }

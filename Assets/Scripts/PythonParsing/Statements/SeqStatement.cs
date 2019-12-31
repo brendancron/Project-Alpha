@@ -9,4 +9,6 @@ public class SeqStatement : Statement{
 	public override string ToString() {
 		return "Seq( "+left+", "+right+" )";
 	}
+
+	public override void Eval(Environment env){}
 }

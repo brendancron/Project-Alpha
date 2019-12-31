@@ -7,6 +7,8 @@ public class Value {
     public readonly bool bool_val;
     public readonly float float_val;
     public readonly FunctionVal func_val;
+    public readonly ObjectVal obj_val;
+    public readonly ClassVal class_val;
 
     public readonly ValType valType;
 
@@ -46,7 +48,9 @@ public class Value {
         String,
         Bool,
         Float,
-        Function
+        Function,
+        ObjectType,
+        ClassType
     }
 
     public Value GetValue() {

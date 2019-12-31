@@ -9,4 +9,6 @@ public class AssignStatement : Statement{
 	public override string ToString() {
 		return "Assign( "+var+", "+val+" )";
 	}
+
+	public override void Eval(Environment env){}
 }

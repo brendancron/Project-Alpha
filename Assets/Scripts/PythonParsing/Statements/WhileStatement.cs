@@ -9,4 +9,6 @@ public class WhileStatement : Statement{
 	public override string ToString() {
 		return "While( "+cond+", "+code+" )";
 	}
+
+	public override void Eval(Environment env){}
 }

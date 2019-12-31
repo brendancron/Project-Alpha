@@ -7,4 +7,8 @@ public class ReturnStatement : Statement{
 	public override string ToString() {
 		return "Return( "+expr+" )";
 	}
+
+	public override void Eval(Environment env) {
+		env.AssignVar("~ret", expr.Eval(env));
+	}
 }

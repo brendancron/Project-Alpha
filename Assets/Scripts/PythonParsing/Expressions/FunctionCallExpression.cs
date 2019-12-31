@@ -3,6 +3,7 @@ using System.Collections.Generic;
 public class FunctionCallExpression : Expression{
 	public FunctionCallExpression(Expression fn, List<Expression> arguments) {
 		this.args = arguments;
+		this.fn = fn;
 	}
 	private List<Expression> args;
 	private Expression fn;
@@ -12,14 +13,19 @@ public class FunctionCallExpression : Expression{
 	}
 
 	public override Value Eval(Environment env) {
-		FunctionVal fVal = fn.Eval(env);
+		Value fVal = fn.Eval(env);
 		if(fVal.valType == Value.ValType.Function) {
 			FunctionVal f = fVal.func_val;
 			//THIS MUST BE CORRECT ENVIRONMENT CHECK
-			Environment e = f.code.Eval(env);
-			return e.GetVar("~ret");
+			env.PushScope();
+			//Should correspond to None!!!
+			env.AssignVar("~ret", null);
+			f.code.Eval(env);
+			Value val = env.GetVar("~ret");
+			env.RemoveScope();
+			return val;
 		} else {
-			throw TypeMismatchException("Must be a function type!!!!! REEEEEEE");
+			throw new TypeMismatchException("Must be a function type!!!!! REEEEEEE");
 		}
 	}
 }

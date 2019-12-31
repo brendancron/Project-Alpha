@@ -7,4 +7,6 @@ public class CommandStatement : Statement{
 	public override string ToString() {
 		return "Command( "+expr+" )";
 	}
+
+	public override void Eval(Environment env){}
 }

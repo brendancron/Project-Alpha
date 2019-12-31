@@ -10,7 +10,7 @@ public class GreaterEqualExpression : Expression{
 		return "GreaterEqual( "+left+", "+right+" )";
 	}
 
-	public override Value Eval() {
+	public override Value Eval(Environment env) {
 		return null;
 	}
 }

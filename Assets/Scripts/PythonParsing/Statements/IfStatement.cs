@@ -11,4 +11,6 @@ public class IfStatement : Statement{
 	public override string ToString() {
 		return "If( "+cond+", "+if_block+", "+else_block+" )";
 	}
+
+	public override void Eval(Environment env){}
 }

@@ -8,7 +8,7 @@ public class IntExpression : Expression{
 		return "Int( "+val+" )";
 	}
 
-	public override Value Eval() {
-		return null;
+	public override Value Eval(Environment env) {
+		return new Value(val);
 	}
 }

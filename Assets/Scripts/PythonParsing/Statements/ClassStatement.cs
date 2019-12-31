@@ -9,4 +9,6 @@ public class ClassStatement : Statement{
 	public override string ToString() {
 		return "Class( "+id+", "+block+" )";
 	}
+
+	public override void Eval(Environment env){}
 }

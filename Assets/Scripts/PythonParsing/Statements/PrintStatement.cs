@@ -7,4 +7,6 @@ public class PrintStatement : Statement{
 	public override string ToString() {
 		return "Print( "+expr+" )";
 	}
+
+	public override void Eval(Environment env){}
 }

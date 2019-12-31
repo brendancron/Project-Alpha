@@ -25,7 +25,7 @@ public class Environment {
                 return scope[name];
             }
         }
-        throw VariableDoesNotExistException(name + " does not exist in the given context");
+        throw new VariableDoesNotExistException(name + " does not exist in the given context");
     }
 
     public void AssignVar(string name, Value val) {

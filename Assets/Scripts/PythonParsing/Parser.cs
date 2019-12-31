@@ -180,11 +180,9 @@ public class Parser {
 	}
 
 	public Expression Parse_Chain() {
-		if(Lookahead() == Token.ID) {
-			Tuple<Token, string> t = consume(Token.ID);
-			Expression expr = new IDExpression(t.Item2);
-			return Parse_ChainHelp(expr);
-		}
+		Tuple<Token, string> t = consume(Token.ID);
+		Expression expr = new IDExpression(t.Item2);
+		return Parse_ChainHelp(expr);
 	}
 
 	public Expression Parse_ChainHelp(Expression expr) {

@@ -1,4 +1,4 @@
-public class IDExpression : Identifier{
+public class IDExpression : Expression {
 	public IDExpression(string id) {
 		this.id = id;
 	}

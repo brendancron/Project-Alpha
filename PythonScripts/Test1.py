@@ -1,1 +1,1 @@
-print(print)
+print(True >= False)

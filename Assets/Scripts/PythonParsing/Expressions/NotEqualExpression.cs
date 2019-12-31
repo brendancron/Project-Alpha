@@ -10,7 +10,7 @@ public class NotEqualExpression : Expression{
 		return "NotEqual( "+left+", "+right+" )";
 	}
 
-	public override Value Eval() {
+	public override Value Eval(Environment env) {
 		return null;
 	}
 }
