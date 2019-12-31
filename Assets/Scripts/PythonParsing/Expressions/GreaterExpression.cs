@@ -9,4 +9,8 @@ public class GreaterExpression : Expression{
 	public override string ToString() {
 		return "Greater( "+left+", "+right+" )";
 	}
+
+	public override Value Eval() {
+		return null;
+	}
 }

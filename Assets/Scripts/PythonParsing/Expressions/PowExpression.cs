@@ -9,4 +9,8 @@ public class PowExpression : Expression{
 	public override string ToString() {
 		return "Pow( "+left+", "+right+" )";
 	}
+
+	public override Value Eval() {
+		return null;
+	}
 }

@@ -7,4 +7,8 @@ public class StringExpression : Expression {
 	public override string ToString() {
 		return "String( "+str+" )";
 	}
+
+	public override Value Eval() {
+		return null;
+	}
 }

@@ -9,4 +9,8 @@ public class DotExpression : Expression{
 	public override string ToString() {
 		return "Dot( "+left+", "+right+" )";
 	}
+
+	public override Value Eval() {
+		return null;
+	}
 }

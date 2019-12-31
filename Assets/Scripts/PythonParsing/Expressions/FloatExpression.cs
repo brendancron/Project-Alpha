@@ -7,4 +7,8 @@ public class FloatExpression : Expression{
 	public override string ToString() {
 		return "Float( "+val+" )";
 	}
+
+	public override Value Eval() {
+		return new Value(val);
+	}
 }

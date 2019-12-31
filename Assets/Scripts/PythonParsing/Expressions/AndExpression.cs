@@ -9,4 +9,8 @@ public class AndExpression : Expression{
 	public override string ToString() {
 		return "And( "+left+", "+right+" )";
 	}
+
+	public override Value Eval() {
+		return null;
+	}
 }

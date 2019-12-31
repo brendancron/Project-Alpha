@@ -7,4 +7,8 @@ public class NotExpression : Expression{
 	public override string ToString() {
 		return "Not( "+expr+" )";
 	}
+
+	public override Value Eval() {
+		return null;
+	}
 }

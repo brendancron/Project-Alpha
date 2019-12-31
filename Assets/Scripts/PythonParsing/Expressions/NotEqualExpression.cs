@@ -9,4 +9,8 @@ public class NotEqualExpression : Expression{
 	public override string ToString() {
 		return "NotEqual( "+left+", "+right+" )";
 	}
+
+	public override Value Eval() {
+		return null;
+	}
 }

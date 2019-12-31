@@ -9,4 +9,8 @@ public class DivExpression : Expression{
 	public override string ToString() {
 		return "Div( "+left+", "+right+" )";
 	}
+
+	public override Value Eval() {
+		return null;
+	}
 }

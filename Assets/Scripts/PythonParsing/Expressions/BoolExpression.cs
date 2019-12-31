@@ -7,4 +7,8 @@ public class BoolExpression : Expression {
 	public override string ToString() {
 		return "Bool( "+val+" )";
 	}
+
+	public override Value Eval() {
+		return new Value(val);
+	}
 }

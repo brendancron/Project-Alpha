@@ -7,4 +7,8 @@ public class IDExpression : Expression{
 	public override string ToString() {
 		return "ID( "+id+" )";
 	}
+
+	public override Value Eval() {
+		return null;
+	}
 }

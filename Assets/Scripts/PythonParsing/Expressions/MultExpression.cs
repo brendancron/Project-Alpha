@@ -9,4 +9,8 @@ public class MultExpression : Expression{
 	public override string ToString() {
 		return "Mult( "+left+", "+right+" )";
 	}
+
+	public override Value Eval() {
+		return null;
+	}
 }

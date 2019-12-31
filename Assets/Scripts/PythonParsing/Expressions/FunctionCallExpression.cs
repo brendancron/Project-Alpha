@@ -11,4 +11,8 @@ public class FunctionCallExpression : Expression{
 	public override string ToString() {
 		return "FunctionCall( "+id+", "+args+" )";
 	}
+
+	public override Value Eval() {
+		return null;
+	}
 }

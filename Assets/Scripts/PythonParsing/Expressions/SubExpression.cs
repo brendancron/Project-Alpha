@@ -9,4 +9,8 @@ public class SubExpression : Expression{
 	public override string ToString() {
 		return "Sub( "+left+", "+right+" )";
 	}
+
+	public override Value Eval() {
+		return null;
+	}
 }

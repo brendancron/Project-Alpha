@@ -9,4 +9,8 @@ public class LessExpression : Expression{
 	public override string ToString() {
 		return "Less( "+left+", "+right+" )";
 	}
+
+	public override Value Eval() {
+		return null;
+	}
 }

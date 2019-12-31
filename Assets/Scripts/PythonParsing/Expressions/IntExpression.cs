@@ -7,4 +7,8 @@ public class IntExpression : Expression{
 	public override string ToString() {
 		return "Int( "+val+" )";
 	}
+
+	public override Value Eval() {
+		return null;
+	}
 }
