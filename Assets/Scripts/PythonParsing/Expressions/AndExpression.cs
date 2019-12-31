@@ -10,7 +10,17 @@ public class AndExpression : Expression{
 		return "And( "+left+", "+right+" )";
 	}
 
-	public override Value Eval() {
-		return null;
+	public override Value Eval(Environment env) {
+		Value lv = left.Eval(env);
+		Value rv = right.Eval(env);
+		if(lv.valType == Value.ValType.Bool) {
+			if(lv.bool_val) {
+				return rv.GetValue();
+			} else {
+				return new Value(false);
+			}
+		} else {
+			return rv.GetValue();
+		}
 	}
 }

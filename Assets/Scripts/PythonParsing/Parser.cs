@@ -168,7 +168,7 @@ public class Parser {
 		} else if(Lookahead() == Token.String) {
 			return new StringExpression(consume(Token.String).Item2);
 		} else if(Lookahead() == Token.ID) {
-			return Parse_DotExpression();
+			return Parse_Chain();
 		} else if(Lookahead() == Token.LParen) {
 			consume(Token.LParen);
 			Expression expr = Parse_Expressison();
@@ -179,30 +179,15 @@ public class Parser {
 		}
 	}
 
-	public Expression Parse_DotExpression() {
-		Expression expr = Parse_FunctionCall();
-		return Parse_DotExpressionHelp(expr);
-	}
-
-	public Expression Parse_DotExpressionHelp(Expression expr) {
-		if(Lookahead() == Token.Dot) {
-			consume(Token.Dot);
-			if(Lookahead() == Token.LParen) {
-				consume(Token.LParen);
-				Expression inner = Parse_DotExpression();
-				consume(Token.RParen);
-				return Parse_DotExpressionHelp(new DotExpression(expr, inner));
-			} else  {
-				Expression fc = Parse_FunctionCall();
-				return Parse_DotExpressionHelp(new DotExpression(expr,fc));
-			}
-		} else {
-			return expr;
+	public Expression Parse_Chain() {
+		if(Lookahead() == Token.ID) {
+			Tuple<Token, string> t = consume(Token.ID);
+			Expression expr = new IDExpression(t.Item2);
+			return Parse_ChainHelp(expr);
 		}
 	}
 
-	public Expression Parse_FunctionCall() {
-		string id = consume(Token.ID).Item2;
+	public Expression Parse_ChainHelp(Expression expr) {
 		if(Lookahead() == Token.LParen) {
 			consume(Token.LParen);
 			List<Expression> args = new List<Expression>();
@@ -214,9 +199,21 @@ public class Parser {
 				}
 			}
 			consume(Token.RParen);
-			return new FunctionCallExpression(id,args);
+			return Parse_ChainHelp(new FunctionCallExpression(expr,args));
+		} else if(Lookahead() == Token.Dot) {
+			consume(Token.Dot);
+			if(Lookahead() == Token.LParen) {
+				consume(Token.LParen);
+				Expression right_expr = Parse_Expressison();
+				consume(Token.RParen);
+				return Parse_ChainHelp(new DotExpression(expr, right_expr));
+			} else {
+				Tuple<Token, string> t = consume(Token.ID);
+				Expression right_expr = new IDExpression(t.Item2);
+				return Parse_ChainHelp(new DotExpression(expr, right_expr));
+			}	
 		} else {
-			return new IDExpression(id);
+			return expr;
 		}
 	}
 

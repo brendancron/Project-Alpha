@@ -1,4 +1,4 @@
-public class IDExpression : Expression{
+public class IDExpression : Identifier{
 	public IDExpression(string id) {
 		this.id = id;
 	}
@@ -8,7 +8,8 @@ public class IDExpression : Expression{
 		return "ID( "+id+" )";
 	}
 
-	public override Value Eval() {
-		return null;
+	public override Value Eval(Environment env) {
+		return env.GetVar(id);
 	}
+
 }

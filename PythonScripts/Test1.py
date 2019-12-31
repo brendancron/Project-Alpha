@@ -1,1 +1,1 @@
-print(False or "abc");
+print(print)

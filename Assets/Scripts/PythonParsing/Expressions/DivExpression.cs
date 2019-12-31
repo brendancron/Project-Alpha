@@ -11,6 +11,18 @@ public class DivExpression : Expression{
 	}
 
 	public override Value Eval() {
-		return null;
+		Value lv = left.Eval(env);
+		Value rv = right.Eval(env);
+		if(lv.valType == Value.ValType.Float && rv.valType == Value.ValType.Float) {
+			if(rv.float_val == 0) {
+				throw new DivideByZeroException("cannot divide by zero!");
+			}
+			return new Value(lv.float_val/rv.float_val);
+		}
+		throw new TypeMismatchException("must both be numbers!");
+	}
+
+	public class DivideByZeroException : Exception {
+		public DivideByZeroException(string message) : base(message) {}
 	}
 }

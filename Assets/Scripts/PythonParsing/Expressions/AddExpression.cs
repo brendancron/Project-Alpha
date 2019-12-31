@@ -10,9 +10,9 @@ public class AddExpression : Expression{
 		return "Add( "+left+", "+right+" )";
 	}
 
-	public override Value Eval() {
-		Value lv = left.Eval();
-		Value rv = right.Eval();
+	public override Value Eval(Environment env) {
+		Value lv = left.Eval(env);
+		Value rv = right.Eval(env);
 		if(lv.valType == rv.valType) {
 			switch(lv.valType) {
 				case Value.ValType.String:

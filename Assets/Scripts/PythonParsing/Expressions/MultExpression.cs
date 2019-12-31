@@ -11,6 +11,11 @@ public class MultExpression : Expression{
 	}
 
 	public override Value Eval() {
-		return null;
+		Value lv = left.Eval(env);
+		Value rv = right.Eval(env);
+		if(lv.valType == Value.ValType.Float && rv.valType == Value.ValType.Float) {
+			return new Value(lv.float_val * rv.float_val);
+		}
+		throw new TypeMismatchException("must both be numbers!");
 	}
 }
