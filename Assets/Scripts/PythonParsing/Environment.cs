@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Environment {
 
-    List<Dictionary<string,Value>> environment;
+    private List<Dictionary<string,Value>> environment;
 
     public Environment() {
         environment = new List<Dictionary<string, Value>>();
         PushScope();
+    }
+
+    public Environment(Environment env) {
+        //DEEP COPY OF ENVIRONMENT
     }
 
     public void PushScope() {

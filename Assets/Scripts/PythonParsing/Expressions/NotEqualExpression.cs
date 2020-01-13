@@ -11,6 +11,6 @@ public class NotEqualExpression : Expression{
 	}
 
 	public override Value Eval(Environment env) {
-		return null;
+		return new BoolVal(!(((BoolVal)(new EqualExpression(left, right).Eval(env))).boolVal));
 	}
 }

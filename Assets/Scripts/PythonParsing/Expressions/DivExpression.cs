@@ -15,13 +15,22 @@ public class DivExpression : Expression{
 	public override Value Eval(Environment env) {
 		Value lv = left.Eval(env);
 		Value rv = right.Eval(env);
-		if(lv.valType == Value.ValType.Float && rv.valType == Value.ValType.Float) {
-			if(rv.float_val == 0) {
+		if(typeof(IntVal).IsInstanceOfType(lv)) {
+			lv = new FloatVal((IntVal)lv);
+		}
+		if(typeof(IntVal).IsInstanceOfType(rv)) {
+			rv = new FloatVal((IntVal)rv);
+		}
+		if(typeof(FloatVal).IsInstanceOfType(lv) && typeof(FloatVal).IsInstanceOfType(rv)) {
+			float lf = ((FloatVal)lv).floatVal;
+			float rf = ((FloatVal)rv).floatVal;
+			if(rf == 0) {
 				throw new DivideByZeroException("cannot divide by zero!");
 			}
-			return new Value(lv.float_val/rv.float_val);
+			return new FloatVal(lf/rf);
+		} else {
+			throw new TypeMismatchException("must both be numbers!");
 		}
-		throw new TypeMismatchException("must both be numbers!");
 	}
 
 	public class DivideByZeroException : Exception {

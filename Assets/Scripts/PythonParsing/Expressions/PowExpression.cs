@@ -15,8 +15,10 @@ public class PowExpression : Expression{
 	public override Value Eval(Environment env) {
 		Value lv = left.Eval(env);
 		Value rv = right.Eval(env);
-		if(lv.valType == Value.ValType.Float && rv.valType == Value.ValType.Float) {
-			return new Value((float)(Math.Pow(lv.float_val, rv.float_val)));
+		if(typeof(NumVal).IsInstanceOfType(lv) && typeof(NumVal).IsInstanceOfType(rv)) {
+			FloatVal f1 = new FloatVal((NumVal)lv);
+			FloatVal f2 = new FloatVal((NumVal)rv);
+			return new FloatVal((float)(Math.Pow(f1.floatVal, f2.floatVal)));
 		}
 		throw new TypeMismatchException("must both be numbers!");
 	}

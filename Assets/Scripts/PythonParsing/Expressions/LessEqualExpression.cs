@@ -11,6 +11,8 @@ public class LessEqualExpression : Expression{
 	}
 
 	public override Value Eval(Environment env) {
-		return null;
+		BoolVal lb = (BoolVal)(new LessExpression(left, right).Eval(env));
+		BoolVal eb = (BoolVal)(new EqualExpression(left, right).Eval(env));
+		return new BoolVal(lb.boolVal || eb.boolVal);
 	}
 }

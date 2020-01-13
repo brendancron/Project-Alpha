@@ -13,9 +13,21 @@ public class MultExpression : Expression{
 	public override Value Eval(Environment env) {
 		Value lv = left.Eval(env);
 		Value rv = right.Eval(env);
-		if(lv.valType == Value.ValType.Float && rv.valType == Value.ValType.Float) {
-			return new Value(lv.float_val * rv.float_val);
+		if(typeof(IntVal).IsInstanceOfType(lv)) {
+			if(typeof(IntVal).IsInstanceOfType(rv)) {
+				int li = ((IntVal)(lv)).intVal;
+				int ri = ((IntVal)(rv)).intVal;
+				return new IntVal(li*ri);
+			} else {
+				lv = new FloatVal((IntVal)lv);
+			}
 		}
-		throw new TypeMismatchException("must both be numbers!");
+		if(typeof(FloatVal).IsInstanceOfType(lv) && typeof(FloatVal).IsInstanceOfType(rv)) {
+			float lf = ((FloatVal)lv).floatVal;
+			float rf = ((FloatVal)rv).floatVal;
+			return new FloatVal(lf*rf);
+		} else {
+			throw new TypeMismatchException("must both be numbers!");
+		}
 	}
 }

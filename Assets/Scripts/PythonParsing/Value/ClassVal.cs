@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClassVal {
+public class ClassVal : Value {
     public readonly Environment env;
+
+    public ClassVal() {
+        
+    }
+
 }

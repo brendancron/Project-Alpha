@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-public class FunctionVal {
+public class FunctionVal : Value {
 
-    public readonly List<Expression> args;
+    public readonly List<string> parameters;
     public readonly Statement code;
 
-    public FunctionVal(List<Expression> args, Statement code) {
-        this.args = args;
+    public FunctionVal(List<string> parameters, Statement code) {
+        this.parameters = parameters;
         this.code = code;
     }
 

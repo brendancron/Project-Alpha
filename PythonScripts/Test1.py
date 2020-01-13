@@ -1,1 +1,1 @@
-print(True >= False)
+print("a" or "b")

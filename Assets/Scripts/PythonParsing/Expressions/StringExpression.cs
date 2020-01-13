@@ -9,6 +9,6 @@ public class StringExpression : Expression {
 	}
 
 	public override Value Eval(Environment env) {
-		return new Value(str);
+		return new StringVal(str);
 	}
 }

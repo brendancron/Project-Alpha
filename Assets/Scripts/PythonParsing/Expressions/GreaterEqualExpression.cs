@@ -11,6 +11,8 @@ public class GreaterEqualExpression : Expression{
 	}
 
 	public override Value Eval(Environment env) {
-		return null;
+		BoolVal gb = (BoolVal)(new GreaterExpression(left, right).Eval(env));
+		BoolVal eb = (BoolVal)(new EqualExpression(left, right).Eval(env));
+		return new BoolVal(gb.boolVal || eb.boolVal);
 	}
 }

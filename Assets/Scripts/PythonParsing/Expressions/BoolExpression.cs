@@ -9,6 +9,6 @@ public class BoolExpression : Expression {
 	}
 
 	public override Value Eval(Environment env) {
-		return new Value(val);
+		return new BoolVal(val);
 	}
 }

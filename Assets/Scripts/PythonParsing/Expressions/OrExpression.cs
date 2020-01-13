@@ -13,14 +13,14 @@ public class OrExpression : Expression{
 	public override Value Eval(Environment env) {
 		Value lv = left.Eval(env);
 		Value rv = right.Eval(env);
-		if(lv.valType == Value.ValType.Bool) {
-			if(lv.bool_val) {
-				return new Value(true);
+		if(typeof(BoolVal).IsInstanceOfType(lv)) {
+			if(((BoolVal)(lv)).boolVal) {
+				return new BoolVal(true);
 			} else {
-				return rv.GetValue();
+				return rv;
 			}
 		} else {
-			return lv.GetValue();
+			return lv;
 		}
 	}
 }

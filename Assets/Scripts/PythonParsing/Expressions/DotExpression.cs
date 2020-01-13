@@ -14,13 +14,12 @@ public class DotExpression : Expression {
 
 	public override Value Eval(Environment env) {
 		Value lv = left.Eval(env);
-		switch(lv.valType) {
-			case Value.ValType.ObjectType:
-				return right.Eval(lv.obj_val.env);
-			case Value.ValType.ClassType:
-				return right.Eval(lv.class_val.env);
-			default:
-				throw new VariableDoesNotExistException("Dot Operations must be used on an object or class!");
+		if(typeof(ObjectVal).IsInstanceOfType(lv)) {
+			return right.Eval(((ObjectVal)lv).env);
+		} else if(typeof(ClassVal).IsInstanceOfType(lv)) {
+			return right.Eval(((ClassVal)lv).env);
+		} else {
+			throw new VariableDoesNotExistException("Dot Operations must be used on an object or class!");
 		}
 	}
 }

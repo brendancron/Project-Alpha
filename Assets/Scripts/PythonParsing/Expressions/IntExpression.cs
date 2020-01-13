@@ -9,6 +9,6 @@ public class IntExpression : Expression{
 	}
 
 	public override Value Eval(Environment env) {
-		return new Value(val);
+		return new IntVal(val);
 	}
 }

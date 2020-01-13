@@ -13,8 +13,19 @@ public class SubExpression : Expression{
 	public override Value Eval(Environment env) {
 		Value lv = left.Eval(env);
 		Value rv = right.Eval(env);
-		if(lv.valType == Value.ValType.Float && rv.valType == Value.ValType.Float) {
-			return new Value(lv.float_val - rv.float_val);
+		if(typeof(IntVal).IsInstanceOfType(lv)) {
+			if(typeof(IntVal).IsInstanceOfType(rv)) {
+				return new IntVal(((IntVal)(lv)).intVal - ((IntVal)(rv)).intVal);
+			}
+			lv = new FloatVal((IntVal)lv);
+		}
+		if(typeof(FloatVal).IsInstanceOfType(lv)) {
+			if(typeof(IntVal).IsInstanceOfType(rv)) {
+				rv = new FloatVal((IntVal)rv);
+			}
+			if(typeof(FloatVal).IsInstanceOfType(rv)) {
+				return new FloatVal(((FloatVal)(lv)).floatVal - ((FloatVal)(rv)).floatVal);
+			}
 		}
 		throw new TypeMismatchException("must both be numbers!");
 	}

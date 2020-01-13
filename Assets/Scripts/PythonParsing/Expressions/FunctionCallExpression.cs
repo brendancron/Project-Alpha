@@ -13,13 +13,20 @@ public class FunctionCallExpression : Expression{
 	}
 
 	public override Value Eval(Environment env) {
+		Environment temp = new Environment(env);
 		Value fVal = fn.Eval(env);
-		if(fVal.valType == Value.ValType.Function) {
-			FunctionVal f = fVal.func_val;
+		if(typeof(FunctionVal).IsInstanceOfType(fVal)) {
+			FunctionVal f = (FunctionVal)(fVal);
 			//THIS MUST BE CORRECT ENVIRONMENT CHECK
 			env.PushScope();
 			//Should correspond to None!!!
 			env.AssignVar("~ret", null);
+			if(args.Count != f.parameters.Count) {
+				throw new System.Exception("ERROR"); //PLEASE HANDLE THIS LINE
+			}
+			for(int i = 0; i < args.Count; i++) {
+				env.AssignVar(f.parameters[i], args[i].Eval(temp));
+			}
 			f.code.Eval(env);
 			Value val = env.GetVar("~ret");
 			env.RemoveScope();

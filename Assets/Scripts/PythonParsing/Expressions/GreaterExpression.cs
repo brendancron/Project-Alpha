@@ -11,6 +11,18 @@ public class GreaterExpression : Expression{
 	}
 
 	public override Value Eval(Environment env) {
-		return null;
+		Value lv = left.Eval(env);
+		Value rv = right.Eval(env);
+		if(typeof(StringVal).IsInstanceOfType(lv)) {
+			if(typeof(StringVal).IsInstanceOfType(rv)) {
+				return new BoolVal(string.Compare(((StringVal)(lv)).stringVal , ((StringVal)(rv)).stringVal) > 0);
+			}
+			throw new TypeMismatchException("must both be strings");
+		} else if(typeof(NumVal).IsInstanceOfType(lv)) {
+			if(typeof(NumVal).IsInstanceOfType(rv)) {
+				return new BoolVal(((NumVal)lv).Compare((NumVal)rv) > 0);
+			}
+		}
+		throw new TypeMismatchException("Invalid comparison");
 	}
 }

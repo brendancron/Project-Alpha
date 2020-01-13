@@ -13,14 +13,14 @@ public class AndExpression : Expression{
 	public override Value Eval(Environment env) {
 		Value lv = left.Eval(env);
 		Value rv = right.Eval(env);
-		if(lv.valType == Value.ValType.Bool) {
-			if(lv.bool_val) {
-				return rv.GetValue();
+		if(typeof(BoolVal).IsInstanceOfType(lv)) {
+			if(((BoolVal)(lv)).boolVal) {
+				return rv;
 			} else {
-				return new Value(false);
+				return new BoolVal(false);
 			}
 		} else {
-			return rv.GetValue();
+			return rv;
 		}
 	}
 }
